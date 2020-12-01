@@ -1,8 +1,27 @@
-const date = '2020-01-02'
+// `zh-CN` is not supported some versions of node
+function formatDateInChinaTimezone(date: Date): string {
+  const dateOptions: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: false,
+    timeZone: 'Asia/Shanghai',
+    timeZoneName: 'short',
+  };
 
-const converted = date.replace(/(\d+)-(\d+)-(\d+)/, (originStr, year, month, day) => {
-  console.log('### parsed', {originStr, year, month, day});
-  return `${year}~${month}~${day}`
-})
+  return date
+    .toLocaleDateString('en-US', dateOptions)
+    .replace(
+      /^(\d+)\/(\d+)\/(\d+), (.+)$/,
+      (_, month, day, year, time) =>
+        `${year}-${month}-${day} ${time}`
+    );
 
-console.log('### converted', converted)
+}
+
+console.log(formatDateInChinaTimezone(new Date()));
+
+console.log(formatDateInChinaTimezone(new Date('2020-01-01T01:02:03.111Z')));

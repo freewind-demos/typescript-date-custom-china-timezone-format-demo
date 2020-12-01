@@ -1,7 +1,7 @@
-TypeScript Replace with Matched Regex Demo
+TypeScript Date Custom China Timezone Format Demo
 ===========================
 
-`string.replace`可以提供一个regex，并且传入一个函数快速获取并产生新的字符串
+自定义以中国时区显示某个时间
 
 ```
 npm install
